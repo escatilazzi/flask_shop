@@ -1,15 +1,36 @@
-import os
-basedir = os.path.abspath(os.path.dirname(__file__))
+from os import environ, path
+from dotenv import load_dotenv
+
+basedir = path.abspath(path.dirname(__file__))
+load_dotenv(path.join(basedir,'.env'))
 
 
 class Config(object):
+    SECRET_KEY = environ.get('SECRET_KEY')
+    SESSION_COOKIE_NAME = environ.get('SESSION_COOKIE_NAME')
+    STATIC_FOLDER = 'static'
+    TEMPLATES_FOLDER = 'templates'
+
+    # Database
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+class DevConfig(Config):
+    FLASK_ENV = 'development'
+    DEBUG= True
+    TESTING = True
+    # AWS Secrets
+    # AWS_SECRET_KEY = environ.get('AWS_SECRET_KEY')
+    # AWS_KEY_ID = environ.get('AWS_KEY_ID')
+
+class ProdConfig(Config):
+    FLASK_ENV = 'production'
+    DEBUG = False
+    TESTING = False
+    DATABASE_URI = environ.get('PROD_DATABASE_URI')
+
+class Test_Config(Config):
     DEBUG= True
     TESTING = True
 
-class DevConfig(Config):
-    SECRET_KEY='dev'
-    DEBUG= True
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'ebuysite.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -1,18 +1,7 @@
-from flask import render_template, flash, redirect, url_for
-from src import app
-from src.forms import LoginForm
+from flask import Blueprint, render_template
+home_bp = Blueprint('home_bp', __name__)
 
-@app.route('/')
-@app.route('/index')
-def index():
-	return render_template('index.html')
-
-@app.route('/login')
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login request for user {}, rememberme={}'.format(form.usr_name.data, form.rememberme.data))
-        return redirect(url_for('index'))
-    return render_template('auth/login.html', title='Sign In', form=form)
-
-
+@home_bp.route('/')
+@home_bp.route('/home')
+def home():
+    return render_template("index.html")
