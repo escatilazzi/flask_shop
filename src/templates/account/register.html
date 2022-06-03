@@ -6,7 +6,7 @@
 {% block body %}
 <body class="text-center">
     <div class="container">
-        <form method="POST" class="form-register" style="color:white">
+        <form method="POST" class="form-register">
             {{ form.hidden_tag() }}
             <h1 class="h3 mb-3 font-weight-normal">
                 Please Create your Account
@@ -14,22 +14,34 @@
             <br>
             {{ form.username.label() }}
             {{ form.username(class="form-control", placeholder="User Name") }}
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
 
             {{ form.email.label() }}
             {{ form.email(class="form-control", placeholder="Email Address") }}
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
 
             {{ form.password.label() }}
             {{ form.password(class="form-control", placeholder="Password") }}
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
 
             {{ form.password2.label() }}
             {{ form.password2(class="form-control", placeholder="Confirm Password") }}
+            {% for error in form.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
 
             <br>
 
-            <!-- <div class="checkbox mb-3">
+            <div class="checkbox mb-3">
                <h6>Already have an account?</h6>
                <a class="btn btn-sm btn-secondary" href="{{ url_for('account.login') }}">Login</a>
-            </div> -->
+            </div>
 
             {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
 

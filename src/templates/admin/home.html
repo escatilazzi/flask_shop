@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+<h1>Dashboard</h1>
+
+<h3>Usuarios:</h3>
+<table class="table table-striped table-hover table-bordered table-sm bg-white">
+    <thead>
+        <tr>
+            <td>Username</td>
+            <td>Email</td>
+            <td>Create</td>
+        </tr>
+    </thead>
+    {% for user in users %}
+    <tbody>
+        <tr>
+            <td>{{user.0}}</td>
+            <td>{{user.1}}</td>
+            <td>{{user.2}}</td>
+            <td>
+                <a href="/deleteUser/{{user.0}}" class="btn btn-danger btn-delete">delete</a>
+              </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+{% endblock %}
