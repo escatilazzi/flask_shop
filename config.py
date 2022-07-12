@@ -1,3 +1,4 @@
+import os
 from os import environ, path
 from dotenv import load_dotenv
 
@@ -10,7 +11,9 @@ class Config(object):
     SESSION_COOKIE_NAME = environ.get('SESSION_COOKIE_NAME')
     STATIC_FOLDER = 'static'
     TEMPLATES_FOLDER = 'templates'
-
+    #UPLOAD_FOLDER = environ.get('UPLOAD_FOLDER')
+    UPLOAD_FOLDER = os.path.join('src/static/images')
+    
     # Database
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False

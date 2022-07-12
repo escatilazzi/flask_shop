@@ -28,11 +28,6 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Categories</a>
-            </li>
-        </ul>
         <ul class="navbar-nav">
               {% if current_user.is_anonymous %}
               <li class="nav-item"><a class="nav-link" href="{{ url_for('account.login')}}">Login</a></li>
@@ -43,6 +38,16 @@
         </ul>
       </div>
     </nav>
+
+    
+    <div class="list-group">
+      <a href="{{ url_for('admin.addCategory')}}" class="list-group-item list-group-item-action">Categorias</a>
+      <a href="{{ url_for('admin.addProduct')}}" class="list-group-item list-group-item-action">Productos</a>
+      <a href="#" class="list-group-item list-group-item-action">Usuarios</a>
+      <a href="{{ url_for('admin.addBrand')}}" class="list-group-item list-group-item-action">Marcas</a>
+      <a href="{{ url_for('admin.addDiscount')}}" class="list-group-item list-group-item-action">Descuentos</a>
+    </div>
+
   {% block body %}{% endblock %}
   {% with messages = get_flashed_messages() %}
     {% if messages %}

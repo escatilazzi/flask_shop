@@ -38,3 +38,8 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('public.home'))
+
+@account_bp.route('/account/profile', methods=['GET','POST'])
+@login_required
+def profile():
+    return render_template('account/profile.html', title='Profile')

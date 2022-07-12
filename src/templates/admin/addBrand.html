@@ -1,0 +1,18 @@
+{% extends 'admin/base.html' %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+<h3>Agregar Marca</h3>
+<form method="POST" class="form-control">
+    {{ form.hidden_tag() }}
+    {{ form.name.label() }}
+    {{ form.name(class="form-control", placeholder="Marca") }}
+    {% for error in form.name.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+
+    {{ form.submit(class="btn btn-primary btn-sm") }}
+</form>
+
+{% endblock %}

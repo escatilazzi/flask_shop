@@ -17,7 +17,13 @@ def create_app():
     #Database
     # init_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     db.init_app(app)
+
+    migrate.init_app(app, db, render_as_batch=True)
     login_manager.init_app(app)
+    login_manager.login_view = 'login'
+    
+    with app.app_context():
+        db.create_all()
 
     from src.public.routes import public_bp
     app.register_blueprint(public_bp)

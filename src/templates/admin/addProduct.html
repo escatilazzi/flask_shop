@@ -1,0 +1,49 @@
+{% extends 'admin/base.html' %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+<h3>Agregar Producto</h3>
+<form method="POST" class="form-control" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.name.label() }}
+    {{ form.name(class="form-control", placeholder="Nombre") }}
+    {% for error in form.name.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.price.label() }}
+    {{ form.price(class="form-control", placeholder="Precio") }}
+    {% for error in form.price.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.description.label() }}
+    {{ form.description(class="form-control", placeholder="Descripcion") }}
+    {% for error in form.description.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.category.label() }}
+    {{ form.category(class="form-control", placeholder="Categoria") }}
+    {{ form.inventory.label() }}
+    {{ form.inventory(class="form-control", placeholder="Inventario") }}
+    {% for error in form.inventory.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.discount.label() }}
+    {{ form.discount(class="form-control", placeholder="Descuento") }}
+    {% for error in form.discount.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.brand.label() }}
+    {{ form.brand(class="form-control", placeholder="Marca") }}
+    {% for error in form.brand.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.image.label() }}
+    {{ form.image(class="form-control-file", placeholder="Imagenes") }}
+    {% for error in form.image.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {{ form.submit(class="btn btn-primary btn-sm") }}
+</form>
+
+{% endblock %}
