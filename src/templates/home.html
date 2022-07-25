@@ -4,6 +4,22 @@
 
 {% endblock %}
 {% block body %}
-<h1>Hi, {{ current_user.username }}!</h1>
+<!-- <h1>Hi, {{ current_user.username }}!</h1> -->
+
+<table class="table table-striped table-hover table-bordered table-sm bg-white">
+    <thead>
+        <tr>
+            <td>Nombre de producto</td>
+            <td>Precio</td>
+        </tr>
+    </thead>
+    {% for product in products %}
+    <tbody>
+        <tr>
+            <td>{{product.0}}</td>
+            <td>{{product.1}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
 
 {% endblock %}

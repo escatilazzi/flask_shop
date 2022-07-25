@@ -1,7 +1,7 @@
 from locale import currency
 import os
 from src import create_app, db
-from flask import render_template, redirect, Blueprint, request, session, url_for, flash
+from flask import render_template, redirect, Blueprint, request, session, url_for, flash, current_app
 from flask_login import current_user, login_required
 from src.admin.utils import admin_required
 from src.models import Discount, User, Category, Product, Brand
@@ -46,7 +46,7 @@ def addBrand():
         return redirect(url_for('admin.adminHome'))
     return render_template("admin/addBrand.html", form=form)
 
-@admin_bp.route('/admin/addBrand', methods=['GET','POST'])
+@admin_bp.route('/admin/addDiscount', methods=['GET','POST'])
 @admin_required
 def addDiscount(): 
     form = addDiscount()
@@ -66,12 +66,13 @@ def addProduct():
     form.brand.choices = [(b.bra_id, b.bra_name) for b in Brand.query.order_by('bra_name')]
     form.discount.choices = [(d.disc_id, d.disc_percent) for d in Discount.query.order_by('disc_percent')]
     if form.validate_on_submit():
-        uploaded_file = form.photo.data
-        if uploaded_file and allowed_file(uploaded_file.filename):
-            filename = secure_filename(uploaded_file.filename)
-            uploaded_file.save(os.path.join(create_app.config['UPLOAD_FOLDER'], filename))
+        image = request.files['image']
+        if image and allowed_file(image.filename):
+            filename = secure_filename(image.filename)
+            #image.save(secure_filename(image.filename))
+            image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
         imagename = filename
-        new_prod = Product(prod_name=form.name.data, prod_price=form.price.data, prod_desc=form.description.data, prod_category_id=form.category.data, prod_inventory_id=form.inventory.data, prod_discounts_id=form.discount.data, prod_brand_id=form.brand.data, prod_image=imagename)
+        new_prod = Product(prod_name=form.name.data, prod_price=form.price.data, prod_desc=form.description.data, prod_category_id=form.category.data, prod_quantity=form.inventory.data, prod_discounts_id=form.discount.data, prod_brand_id=form.brand.data, prod_file=imagename)
         db.session.add(new_prod)
         db.session.commit()
         flash("Add product successfully")
