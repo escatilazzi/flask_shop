@@ -61,7 +61,7 @@ class Product(db.Model):
     
     prod_id = db.Column(db.Integer, primary_key=True)
     prod_name = db.Column(db.String(3000), nullable=False)
-    prod_price = db.Column(db.Float, nullable=False)
+    prod_price = db.Column(db.DECIMAL(10, 2), nullable=False)
     prod_desc = db.Column(db.Text, nullable=False) 
     prod_quantity = db.Column(db.Integer, nullable=False)
     prod_category_id = db.Column(db.Integer, db.ForeignKey('categories.cat_id'))
