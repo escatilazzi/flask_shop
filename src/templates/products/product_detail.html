@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+{% block body %}
+<body>
+	<h2>{{ product.prod_name }}</h2>
+	<h5>{{ category.cat_name }} </h5>
+	<img src="{{ url_for('static', filename='images/') }}{{product.prod_file}}">
+	<p>$ {{ product.prod_price }}</p>
+	<p>Quedan {{ product.prod_quantity }} disponibles</p>
+	<a class="btn btn-outline-success">Agregar al carrito</a>
+{% endblock %}

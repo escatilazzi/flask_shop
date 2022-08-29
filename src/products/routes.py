@@ -11,7 +11,7 @@ product_bp = Blueprint("product",__name__)
 
 
 @product_bp.route("/product/<int:product_id>", methods=["GET","POST"])
-def displayProduct(prod_id, prod_cat_id):
-	prod_detail = Product.query.filter_by(prod_id=prod_id)
-	category = Category.query.filter_by(id=prod_cat_id)
-	return render_template("product.html", category=category.name, prod_detail=prod_detail)
+def product_detail(product_id):
+	product = Product.query.filter_by(prod_id=product_id).first()
+	category = Category.query.filter_by(cat_id=product.prod_category_id).first()
+	return render_template("products/product_detail.html", product=product, name=product.prod_name, image=product.prod_file, price=product.prod_price, quantity=product.prod_quantity, category=category, cat_name=category.cat_name)

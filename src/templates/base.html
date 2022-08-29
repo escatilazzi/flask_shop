@@ -33,10 +33,11 @@
         </ul>
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           {% if current_user.is_anonymous %}
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('account.login')}}">Iniciar</a></li>
+          <li class="nav-item"><a class="btn btn-secondary" href="{{ url_for('account.login')}}">Iniciar</a></li>
           {% else %}
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('account.profile')}}">Perfil</a>
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('account.logout')}}">Cerrar Sesion</a>
+          <li class="nav-item"><a class="btn btn-secondary" href="{{ url_for('account.profile')}}">Perfil</a>
+            
+          <li class="nav-item"><a class="btn btn-secondary" href="{{ url_for('account.logout')}}">Cerrar Sesion</a>
           {% endif %}
           </li>
         </ul>

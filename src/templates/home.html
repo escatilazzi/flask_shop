@@ -17,7 +17,7 @@
  -->                 
                     <img src="{{ url_for('static', filename='images/') }}{{product.prod_file}}" class="img-thumbnail" style=max-width: 400px;>
                     <div class="card-body">
-                      <h5>{{ product.prod_name }}</h5>
+                      <a href="{{url_for('product.product_detail', product_id=product.prod_id)}}"><h5>{{ product.prod_name }}</h5></a>
                       <p class="card-text">{{product.prod_desc}}</p>
                       <span class="text-muted">${{product.prod_price}}</span>
                       <div class="d-flex justify-content-between align-items-center">
