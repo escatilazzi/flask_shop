@@ -20,7 +20,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(256), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     created = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
-
+    orders = db.relationship('order', backref='order')
     roles = db.relationship("Role", secondary="user_roles", viewonly=True)
     # def __init__(self, username, email, password):
     #     self.username = username
@@ -76,7 +76,6 @@ class Product(db.Model):
     prod_brand_id = db.Column(db.Integer, db.ForeignKey('brands.bra_id'))
     brand = db.relationship('Brand', backref=db.backref('product'), lazy=True)
 
-
     def __repr__(self):
         return '<Addproduct {}>'.format(self.prod_name)
 
@@ -115,26 +114,44 @@ class Image(db.Model):
     img_file = db.Column(db.Text)
     img_product_id = db.Column(db.Integer, db.ForeignKey('product.prod_id'))
 
-# class Cart(db.Model):
-#     __tablename__ = "cart"
+class Cart(db.Model):
+    __tablename__ = "cart"
 
-#     cart_id = db.Column(db.Integer(), primary_key=True)
-#     cart_session_id = db.Column(db.Integer(), db.ForeingKey('sessions.ords_id'))
-#     session = db.relationship('sessions', backref=db.backref('cart'), lazy=True)
-#     cart_product_id = db.Column(db.Integer(), db.ForeingKey('product.prod_id'))
-#     product = db.relationship('product', backref=db.backref('cart'), lazy=True)
-#     cart_quantity = db.Column(db.Integer)
-#     cart_created = db.Column(db.DateTime())
+    cart_id = db.Column(db.Integer, primary_key=True)
+    cart_product_id = db.Column(db.Integer, db.ForeignKey('product.prod_id'))
+    product = db.relationship('Product', backref=db.backref('cart'), lazy=True)
+    cart_quantity = db.Column(db.Integer)
+    cart_created = db.Column(db.DateTime, default=datetime.now )
 
 
-# class Order(db.Model):
-#     __tablename__ = "orders"
+class Order(db.Model):
+    __tablename__ = "order"
 
-#     ord_id = db.Column(db.Integer, primary_key=True)
-#     ord_user_id = db.Column(db.Integer, db.ForeingKey('users.usr_id'), nullable=False)
-#     user = db.relationship('User', backref=db.backref('orders', lazy=True))
-#     ord_product_id = db.Column(db.Integer, db.ForeingKey('product.prod_id'), nullable=False)
-#     product = db.relationship('product', backref=db.backref('orders'), lazy=True)
-#     ord_quantity = db.Column(db.Integer, nullable=False)
-#     ord_created = db.Column(db.DateTime)
-#     ord_modified = db.Column(db.DateTime)
+    ord_id = db.Column(db.Integer, primary_key=True)
+    ord_user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('order', lazy=True))
+    ord_product_id = db.Column(db.Integer, db.ForeignKey('product.prod_id'), nullable=False)
+    product = db.relationship('Product', backref=db.backref('order'), lazy=True)
+    ord_quantity = db.Column(db.Integer(), nullable=False)
+    ord_total = db.Column(db.Integer())
+    ord_country = db.Column(db.String(300))
+    ord_city = db.Column(db.String(300))
+    ord_address = db.Column(db.String(300))
+    ord_phone = db.Column(db.String(300))
+    ord_email = db.Column(db.String(300))
+    ord_payment_method = db.Column(db.String(300))
+    ord_start_pay_date = db.Column(db.DateTime)
+    ord_create_order_date = db.Column(db.DateTime)
+    ord_finish_pay_date = db.Column(db.DateTime)
+
+
+class Comment(db.Model):
+    __tablename__= "comment"
+
+    com_id = db.Column(db.Integer, primary_key=True)
+    com_user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('comment', lazy=True))
+    com_comment = db.Column(db.String(5000))
+    com_product_id = db.Column(db.Integer, db.ForeignKey('product.prod_id'))
+    product = db.relationship('Product', backref=db.backref('comment', lazy=True))
+    com_create_date = db.Column(db.DateTime)
