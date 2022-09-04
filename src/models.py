@@ -20,7 +20,6 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(256), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     created = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
-    orders = db.relationship('order', backref='order')
     roles = db.relationship("Role", secondary="user_roles", viewonly=True)
     # def __init__(self, username, email, password):
     #     self.username = username

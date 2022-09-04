@@ -33,6 +33,8 @@ def create_app():
     app.register_blueprint(admin_bp)
     from src.products.routes import product_bp
     app.register_blueprint(product_bp)
+    from src.cart.routes import cart_bp
+    app.register_blueprint(cart_bp)
 
     return app
 
