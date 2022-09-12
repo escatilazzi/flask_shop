@@ -117,8 +117,10 @@ class Cart(db.Model):
     __tablename__ = "cart"
 
     cart_id = db.Column(db.Integer, primary_key=True)
-    cart_product_id = db.Column(db.Integer, db.ForeignKey('product.prod_id'))
+    cart_product_id = db.Column(db.Integer, db.ForeignKey('product.prod_id'), nullable=False)
     product = db.relationship('Product', backref=db.backref('cart'), lazy=True)
+    cart_user_id= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('cart', lazy=True))
     cart_quantity = db.Column(db.Integer)
     cart_created = db.Column(db.DateTime, default=datetime.now )
 

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+{% block body %}
+<table class="table table-striped table-hover table-bordered table-sm bg-white">
+    <thead>
+        <tr>
+            <td>Producto</td>
+            <td>Cantidad</td>
+            <td>Precio</td>
+        </tr>
+    </thead>
+    {% for i in items%}
+    <tbody>
+        <tr>
+            <td>{{ items.name }}</td>
+            <td>{{ items.price }}</td>
+            <td>{{ items.quantity }}</td>
+            <td><a href="#" class="btn btn-primary">Finalizar Compra</a></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
