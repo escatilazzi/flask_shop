@@ -5,21 +5,19 @@
 {% endblock %}
 {% block body %}
 <table class="table table-striped table-hover table-bordered table-sm bg-white">
-    <thead>
         <tr>
-            <td>Producto</td>
-            <td>Cantidad</td>
-            <td>Precio</td>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th></th>
         </tr>
-    </thead>
-    {% for i in items%}
-    <tbody>
+        {% for c in cart_products %}
         <tr>
-            <td>{{ items.name }}</td>
-            <td>{{ items.price }}</td>
-            <td>{{ items.quantity }}</td>
-            <td><a href="#" class="btn btn-primary">Finalizar Compra</a></td>
+            <td>{{c.0}}</td>
+            <td>{{c.1}}</td>
+            <td>{{c.2}}</td>
+            <th><a href="#" class="btn btn-primary">Finalizar Compra</a></th>
         </tr>
-    </tbody>
+        {% endfor %}
 </table>
 {% endblock %}

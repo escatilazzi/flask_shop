@@ -17,7 +17,7 @@ def allowed_file(filename):
 
 @admin_bp.route('/admin/home')
 @admin_required
-def adminHome():
+def home():
     q_users = db.session.query(User.username, User.email, User.created)
     return render_template('admin/home.html', users=q_users)
 
