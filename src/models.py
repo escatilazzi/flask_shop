@@ -76,7 +76,7 @@ class Product(db.Model):
     brand = db.relationship('Brand', backref=db.backref('product'), lazy=True)
 
     def __repr__(self):
-        return '<Addproduct {}>'.format(self.prod_name)
+        return f"Product('{self.prod_id}','{self.prod_name}','{self.prod_price}','{self.prod_desc}','{self.prod_quantity}','{self.prod_discounts_id}'"
 
 class Category(db.Model):
     __tablename__ = "categories"
@@ -124,6 +124,8 @@ class Cart(db.Model):
     cart_quantity = db.Column(db.Integer)
     cart_created = db.Column(db.DateTime, default=datetime.now )
 
+    def __repr__(self):
+        return f"Cart('{self.cart_user_id},'{self.cart_product_id}','{self.cart_quantity}')"
 
 class Order(db.Model):
     __tablename__ = "order"

@@ -13,11 +13,15 @@
         </tr>
         {% for c in cart_products %}
         <tr>
-            <td>{{c.0}}</td>
+            <td >{{c.0}}</td>
             <td>{{c.1}}</td>
-            <td>{{c.2}}</td>
-            <th><a href="#" class="btn btn-primary">Finalizar Compra</a></th>
+            <td>{{c.2}}
+                <a href="{{url_for('cart.increase_cart', product_id=c.1) }}" class="btn btn-warning" style="text-align: right;">+</a>
+                <a href="#" class="btn btn-warning" style="text-align: right;">-</a>
+            </td>
+            <th></th>
         </tr>
         {% endfor %}
 </table>
+<a href="#" class="btn btn-primary">Finalizar Compra</a>
 {% endblock %}
