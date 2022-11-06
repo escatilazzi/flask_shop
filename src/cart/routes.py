@@ -54,37 +54,3 @@ def showCart():
         subtotal += float(product['price']) * int(product['quantity'])
         total = float(subtotal)
     return render_template('/cart/cart.html', total=total, subtotal=subtotal)
-
-
-
-
-
-# @cart_bp.route("/addCart/<int:id>",  methods=["GET","POST"])
-# def addCart(id):
-#     if current_user.is_anonymous:
-#         return redirect(url_for('account.login'))
-#     kart = Cart(cart_user_id=current_user.id, cart_product_id=id, cart_quantity=1)
-#     db.session.add(kart)
-#     db.session.commit()
-#     return redirect(url_for('public.home'))
-
-# @cart_bp.route("/cart",  methods=["GET","POST"])
-# def show_cart():
-#     if current_user.is_anonymous:
-#         return redirect(url_for('account.login'))
-#     cart_products= db.session.query(Product.prod_name, Product.prod_price, Cart.cart_quantity).join(Cart, Product.prod_id==Cart.cart_id).filter(Cart.cart_user_id)
-#     return render_template("/cart/cart.html", cart_products=cart_products)
-
-
-# @cart_bp.route("/cart/<int:product_id>", methods=["GET","POST"])
-# @login_required
-# def increase_cart(product_id):
-#     qty = db.session.query(Cart.cart_quantity).filter(Cart.cart_product_id == product_id, Cart.cart_user_id == current_user.id).first()
-#     inv = Product.query.query(Product.filter(Product.prod_id == product_id).first()
-#     while qty < inv:
-#         kart.cart_quantity += 1
-#         db.session.commit()
-#         return redirect(url_for('cart.show_cart'))
-#     else:
-#         flash("No hay stock")
-#         return redirect(url_for("cart.show_Cart"))
