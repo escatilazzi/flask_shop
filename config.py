@@ -7,7 +7,8 @@ load_dotenv(path.join(basedir,'.env'))
 
 
 class Config(object):
-    SECRET_KEY = environ.get('SECRET_KEY')
+#    SECRET_KEY = environ.get('SECRET_KEY')
+    #SECRET_KEY='dev_test'
     SESSION_COOKIE_NAME = environ.get('SESSION_COOKIE_NAME')
     STATIC_FOLDER = 'static'
     TEMPLATES_FOLDER = 'templates'

@@ -22,7 +22,10 @@
                       <span class="text-muted">${{product.prod_price}}</span>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <a href="{{url_for('cart.addCart', id=product.prod_id)}}" class="btn btn-sm btn-warning">Add to cart</a>
+                          <form action="{{url_for('cart.addCart')}}" method="post">
+                            <input type="hidden" name="product_id" value="{{product.prod_id}}">
+                            <button type="submit" class="btn btn-sm btn-warning float-right">Add to Cart</button>
+                          </form>
                         </div>
                       </div>
                     </div>
