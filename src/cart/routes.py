@@ -41,16 +41,36 @@ def addCart():
             
     except Exception as e:
         print(e)
+        print(session['Cart'])
     finally:
         return redirect(url_for('public.home'))
 
 @cart_bp.route("/cart", methods=["GET","POST"])
 def showCart():
-    if 'Cart' not in session:
-        return redirect(request.referrer)
     subtotal = 0
     total = 0
     for key, product in session['Cart'].items():
         subtotal += float(product['price']) * int(product['quantity'])
         total = float(subtotal)
     return render_template('/cart/cart.html', total=total, subtotal=subtotal)
+
+@cart_bp.route("/deleteItem/<int:id>",  methods=["POST"])
+def deleteItem(id):
+    try:
+        session.modified=True
+        for key, item in session['Cart'].items():
+            if int(key) == id:
+                session['Cart'].pop(key, None)
+                return redirect(url_for('cart.showCart'))
+    except Exception as e:
+        print(e)
+        return redirect(url_for('cart.showCart'))
+        
+@cart_bp.route("/clearCart")
+def clearCart():
+    try:
+        session.pop('Cart', None)
+        return redirect(url_for('public.home'))
+    except Exception as e:
+        print(e)
+    

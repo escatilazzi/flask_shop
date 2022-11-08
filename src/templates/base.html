@@ -40,7 +40,7 @@
           <li>
           </li>
           {% if current_user.is_anonymous %}
-          <a href="{{ url_for('cart.showCart')}}">Cart ({{session['Cart']|length}})<span id="boot-icon" class="bi bi-cart" style="font-size: 29px; color: rgb(255, 210, 48);"></span></a>
+          <a href="{{ url_for('cart.showCart')}}">Cart ({{session['Cart']|length}})</a>
           <li class="nav-item"><a class="btn btn-warning" href="{{ url_for('account.login')}}">Iniciar</a></li>
           {% else %}
           <li class="nav-item"><a href="{{ url_for('account.profile')}}"><span id="boot-icon" class="bi bi-person" style="font-size: 29px; color: rgb(255, 210, 48);"></a>

@@ -4,34 +4,41 @@
 
 {% endblock %}
 {% block body %}
-<table class="table table-striped table-hover table-bordered table-sm bg-white">
-    <thead>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Sub Total</th>
-    </thead>
-    <tbody>
-        {% for key,product in session['Cart'].items() %}
-        <tr>
-            <td><img src="{{ url_for('static', filename='images/') }}{{product.image}}" alt="{{product.name}}" width="50" height="45"></td>
-            <td>{{ product.name }}</td>
-            <td> <input type="number" name="quantity" min="1" max="10" value="{{product.quantity}}"> </td>
-            <!-- <td>{{ product.price }}</td> -->
-            {% set subtotal = product.quantity|int * product.price|float  %}
-            <td> ${{"%.2f"|format(subtotal)}}
-            <td><button type="submit" class="btn btn-sm btn-danger float-right">Eliminar</button></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<hr>
-<table class="table table-sm">
-    <tr>
-        <td><a href="#" class="btn btn-primary">Finalizar Compra</a></td>
-        <td><h5>Total: {{total}}</h5></td>
-        <td> <a href="" class="btn btn-danger btn-sm float-right mr-4"> Vaciar Carrito</a> </td>
-    </tr>
+    {% if session['Cart']|length == 0 %}
+        <table>
+            <tr>
+                <td><h5>No hay productos en el carrito. Vuelva prontos </h5></td>
+            </tr>
+        </table>
+    {% else %}
+        <table class="table table-striped table-hover table-bordered table-sm bg-white">
+            <thead>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </thead>
+            <tbody>
+                {% for key,product in session['Cart'].items() %}
+                <tr>
+                    <td><img src="{{ url_for('static', filename='images/') }}{{product.image}}" alt="{{product.name}}" width="50" height="45"></td>
+                    <td>{{ product.name }}</td>
+                    <td> <input type="number" name="quantity" min="1" max="10" value="{{product.quantity}}"> </td>
+                    {% set subtotal = product.quantity|int * product.price|float  %}
+                    <td> ${{"%.2f"|format(subtotal)}}
+                    <td><a href="{{ url_for('cart.deleteItem', id=key)}}" class="btn btn-sm btn-danger float-right">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        <table class="table table-sm">
+            <tr>
+                <td><a href="" class="btn btn-primary">Finalizar Compra</a></td>
+                <td><h5>Total: {{total}}</h5></td>
+                <td> <a href="{{ url_for('cart.clearCart')}}" class="btn btn-danger btn-sm float-right mr-4"> Vaciar Carrito</a> </td>
+            </tr>
 
-</table>
+        </table>
+    {% endif %}
 {% endblock %}

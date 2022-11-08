@@ -25,6 +25,7 @@
                           <form action="{{url_for('cart.addCart')}}" method="post">
                             <input type="hidden" name="product_id" value="{{product.prod_id}}">
                             <button type="submit" class="btn btn-sm btn-warning float-right">Add to Cart</button>
+                            <input type="hidden" name="quantity" value="1" min="1" max="20">
                           </form>
                         </div>
                       </div>
