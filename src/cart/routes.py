@@ -45,14 +45,18 @@ def addCart():
     finally:
         return redirect(url_for('public.home'))
 
-@cart_bp.route("/cart", methods=["GET","POST"])
+@cart_bp.route("/cart")
 def showCart():
     subtotal = 0
     total = 0
-    for key, product in session['Cart'].items():
-        subtotal += float(product['price']) * int(product['quantity'])
-        total = float(subtotal)
-    return render_template('/cart/cart.html', total=total, subtotal=subtotal)
+    if 'Cart' not in session or len(session['Cart']) <=0:
+        empty=1
+    else:
+        empty=0
+        for key, product in session['Cart'].items():
+            subtotal += float(product['price']) * int(product['quantity'])
+            total = float(subtotal)
+    return render_template('/cart/cart.html', total=total, subtotal=subtotal, empty=empty)
 
 @cart_bp.route("/deleteItem/<int:id>",  methods=["POST"])
 def deleteItem(id):
