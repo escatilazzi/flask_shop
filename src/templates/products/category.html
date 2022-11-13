@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    {% for cat_prod in cat_product %}
+        <h5>{{cat_prod}}</h5>
+    {% endfor %}
+</div>
+
+{% endblock %}

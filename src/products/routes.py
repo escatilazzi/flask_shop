@@ -15,3 +15,9 @@ def product_detail(product_id):
 	product = Product.query.filter_by(prod_id=product_id).first()
 	category = Category.query.filter_by(cat_id=product.prod_category_id).first()
 	return render_template("products/product_detail.html", product=product, name=product.prod_name, image=product.prod_file, price=product.prod_price, quantity=product.prod_quantity, category=category, cat_name=category.cat_name)
+
+@product_bp.route("/category/<int:cat_id>", methods=["GET","POST"])
+def showCategory(cat_id):
+    cat_product = db.session.query(Product).join(Category).filter(Product.prod_category_id == cat_id).all()
+    return render_template("products/category.html", cat_product=cat_product)
+    

@@ -1,12 +1,11 @@
 from operator import index
 from turtle import back
-from src import login_manager , db, create_app
+from src import login_manager , db
 from sqlalchemy.orm import relationship, backref
 from flask_login import UserMixin
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user
-from flask_user import UserManager
 
 @login_manager.user_loader
 def load_user(usr_id):
@@ -88,6 +87,9 @@ class Category(db.Model):
     def __init__(self,cat_name):
         self.cat_name = cat_name
 
+    def categories():
+        categories = db.session.query(Category).all()
+        return categories
 
 class Discount(db.Model):
     __tablename__ = "discounts"

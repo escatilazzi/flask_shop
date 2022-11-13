@@ -26,9 +26,16 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav navbar-nav me-auto">
-
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categorias</a>
+            <ul class="dropdown-menu">
+              {% for cat in categories %}
+                <li><a class="dropdown-item" href="{{ url_for('product.showCategory', cat_id=cat.cat_id) }}">{{cat.cat_name}}</a></li>
+              {% endfor %}
+            </ul>
           </li>
           {% if current_user.id == 1 %}
           <li>
@@ -36,6 +43,7 @@
           </li>
           {% endif %}
         </ul>
+
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li>
           </li>
