@@ -21,52 +21,61 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="{{ url_for('public.home')}}">E-buysite</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav navbar-nav me-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categorias</a>
-            <ul class="dropdown-menu">
-              {% for cat in categories %}
-                <li><a class="dropdown-item" href="{{ url_for('product.showCategory', cat_id=cat.cat_id) }}">{{cat.cat_name}}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
-          {% if current_user.id == 1 %}
-          <li>
-            <a class="nav-link" href="{{ url_for('admin.home')}}">Administrador</a>
-          </li>
-          {% endif %}
-        </ul>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('public.home')}}">E-buysite</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li>
-          </li>
-          {% if session['Cart']|length == 0 %}
-            <a href="{{ url_for('cart.showCart')}}"> <span id="boot-icon" class="bi bi-cart" style="font-size: 30px; color: rgb(255, 210, 48);"></span></a>
-          {% else %}
-            <a href="{{ url_for('cart.showCart')}}"> <span id="boot-icon" class="bi bi-cart-check-fill" style="font-size: 30px; color: rgb(255, 210, 48);"></span></a>
-          {% endif %}
-          {% if current_user.is_anonymous %}
-          <li class="nav-item"><a class="btn btn-warning" href="{{ url_for('account.login')}}">Iniciar</a></li>
-          {% else %}
-          <li class="nav-item"><a href="{{ url_for('account.profile')}}"><span id="boot-icon" class="bi bi-person" style="font-size: 29px; color: rgb(255, 210, 48);"></a>
-            
-          <li class="nav-item"><a class="btn btn-secondary" href="{{ url_for('account.logout')}}">Cerrar Sesion</a>
-          {% endif %}
-        </ul>
-      </div>
-  </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav navbar-nav me-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categorias</a>
+              <ul class="dropdown-menu">
+                {% for cat in categories %}
+                  <li><a class="dropdown-item" href="{{ url_for('product.showCategory', cat_id=cat.cat_id) }}">{{cat.cat_name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% if current_user.id == 1 %}
+            <li>
+              <a class="nav-link" href="{{ url_for('admin.home')}}">Administrador</a>
+            </li>
+            {% endif %}
+          </ul>
 
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li>
+            </li>
+            {% if session['Cart']|length == 0 %}
+              <a href="{{ url_for('cart.showCart')}}"> <span id="boot-icon" class="bi bi-cart" style="font-size: 30px; color: rgb(255, 210, 48);"></span></a>
+            {% else %}
+              <a href="{{ url_for('cart.showCart')}}"> <span id="boot-icon" class="bi bi-cart-check-fill" style="font-size: 30px; color: rgb(255, 210, 48);"></span></a>
+            {% endif %}
+            {% if current_user.is_anonymous %}
+            <li class="nav-item"><a class="btn btn-warning" href="{{ url_for('account.login')}}">Iniciar</a></li>
+            {% else %}
+            <li class="nav-item"><a href="{{ url_for('account.profile')}}"><span id="boot-icon" class="bi bi-person" style="font-size: 29px; color: rgb(255, 210, 48);"></a>
+              
+            <li class="nav-item"><a class="btn btn-secondary" href="{{ url_for('account.logout')}}">Cerrar Sesion</a>
+            {% endif %}
+          </ul>
+        </div>
+    </nav>
 
   {% block body %}{% endblock %}
 
-  
+<div class="container">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contactanos</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+      </ul>
+      <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
+    </footer>
+</div>  
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul class=flashes>

@@ -12,9 +12,7 @@
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {% for product in prod_data %}      
                 <div class="col">
-                  <div class="card shadow-sm">
-<!--                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
- -->                 
+                  <div class="card shadow-sm">          
                     <img src="{{ url_for('static', filename='images/') }}{{product.prod_file}}" class="img-thumbnail" style=max-width:400px;>
                     <div class="card-body">
                       <a href="{{url_for('product.product_detail', product_id=product.prod_id)}}"><h5>{{ product.prod_name }}</h5></a>

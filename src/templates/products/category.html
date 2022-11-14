@@ -4,11 +4,32 @@
 
 {% endblock %}
 {% block body %}
-
 <div class="container">
-    {% for cat_prod in cat_product %}
-        <h5>{{cat_prod}}</h5>
+    <h3>{{category}}</h3>
+    {% for prod in prod_cat %}
+
+        <div class="row mb-2">
+            <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                <a href="{{url_for('product.product_detail', product_id=prod.prod_id)}}"><h5>{{ prod.prod_name }}</h5></a>
+                <p class="card-text mb-auto">{{prod.prod_desc}}</p>
+                <p>${{prod.prod_price}}</p>
+                <div class="btn-group">
+                    <form action="{{url_for('cart.addCart')}}" method="post">
+                      <input type="hidden" name="product_id" value="{{prod.prod_id}}">
+                      <button type="submit" class="btn btn-sm btn-warning float-right">Add to Cart</button>
+                      <input type="hidden" name="quantity" value="1" min="1" max="20">
+                    </form>
+                  </div>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src="{{ url_for('static', filename='images/') }}{{prod.prod_file}}" alt="{{prod.prod_name}}" width="150" height="150">
+                </div>
+
+            </div>
+            </div>
+        </div>
     {% endfor %}
 </div>
-
 {% endblock %}
