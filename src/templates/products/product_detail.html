@@ -5,8 +5,8 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-	<h2>{{ product.prod_name }}</h2>
 	<h5>{{ category.cat_name }} </h5>
+	<h3>{{ product.prod_name }}</h3>
 	<img src="{{ url_for('static', filename='images/') }}{{product.prod_file}}">
 	<p>$ {{ product.prod_price }}</p>
 	<p>Quedan {{ product.prod_quantity }} disponibles</p>
@@ -17,27 +17,22 @@
 		<input type="number" name="quantity" value="1" min="1" max="{{product.prod_quantity}}">             
 	</form>
 	<br>
-	<form method="POST" action="">
-		{{ form.hidden_tag() }}
-		<fieldset class="form-group">
-			<legend class="border-bottom mb-4">Comment</legend>
-			<div class="form-group">
-				{{ form.comment.label(class="form-control-label") }}
-				{% if form.comment.errors %}
-					{{ form.body(class="form-control form-control-lg is-invalid") }}
-					<div class="invalid-feedback">
-						{% for error in form.comment.errors %}
-							<span>{{ error }}</span>
-						{% endfor %}
-					</div>
-				{% else %}
-					{{ form.comment(class="form-control form-control-lg") }}
-				{% endif %}
-			</div>
-		</fieldset>
-		<div class="form-group">
-			{{ form.submit(class="btn btn-outline-info") }}
-		</div>
-	</form>
+	{% for c in comments %}
+		<p>{{c.com_comment}}</p>
+	{% endfor %}
+	<br>
+	<div class="content-section">
+			<form method="POST">
+				<div class="form-group form-inline">
+				  <!-- <div class="form-group col-lg-6 col-md-6 email">
+					<input type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+				  </div>										 -->
+				</div>
+				<div class="form-group">
+					<textarea name="comment" class="form-control mb-10" rows="5" name="comment" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+				</div>
+				<button type="submit" class="primary-btn submit_btn">Enviar comentario</button>	
+			</form>
+    </div>
 </div>
 {% endblock %}
