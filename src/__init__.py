@@ -5,11 +5,12 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from config import Config
 import os
+from flask_mail import Mail, Message
 
 login_manager = LoginManager()
 migrate = Migrate()
 db = SQLAlchemy()
-
+mail.init_app(app)
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
